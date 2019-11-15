@@ -1,0 +1,27 @@
+<div class="container">
+    <p><button [routerLink]="['/restaurant/new']" class="btn btn-outline-info">New Restaurant</button></p>
+    <br>
+    <table class="table table-striped table-active">
+        <thead>
+            <tr>
+                <th scope="col">Restaurant</th>
+                <th scope="col">Cuisine</th>
+                <th scope="col">Actions avaliable</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let a of restaurants">
+                <th scope="row">{{a['name']}}</th>
+                <td>{{a['cuisine']}}</td>
+                <td>
+                    <button  class="btn btn-outline-info" [routerLink]="['/restaurant', a['_id']]">Read Review</button>
+                    <button [routerLink]="[a['_id'], 'edit']" class="btn btn-outline-warning">Update</button>
+                    <button class="btn btn-outline-danger" (click)="delete(a['_id'])">Delete</button>
+                    <!-- <button *ngIf="!canDelete" class="btn btn-outline-danger" (click)="delete(a['_id'])" disabled>Delete</button> -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<router-outlet></router-outlet>

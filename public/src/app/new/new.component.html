@@ -1,0 +1,38 @@
+<div class="container">
+    <h4>Register a restaurant</h4>
+    <form (submit)="onSubmit()">
+        <p>{{newRestaurant| json}}</p>
+        <div *ngIf="!name.valid && name.errors.required" class="text-danger">* Name is required</div>
+        <div *ngIf="!name.valid && name.errors.minlength" class="text-danger">* Name should be at least 3 characters
+        </div>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" [(ngModel)]="newRestaurant.name" 
+                required 
+                minlength="3"
+                #name='ngModel'>
+        </div>
+
+        <div *ngIf="!cuisine.valid && cuisine.errors.required" class="text-danger">* Cuisine is required</div>
+        <div *ngIf="!cuisine.valid && cuisine.errors.minlength" class="text-danger">* Cuisine should be at least 3 characters
+        </div>
+        <div class="form-group">
+            <label for="cuisine">Cuisine</label>
+            <input type="text" class="form-control" id="cuisine" name="cuisine" [(ngModel)]="newRestaurant.cuisine" 
+                required 
+                minlength="3"
+                #cuisine='ngModel'>
+        </div>
+
+        <div *ngIf="errors.length > 0">
+            <ul *ngFor="let error of errors">
+                <li>{{error}}</li>
+            </ul>
+        </div>
+        <li *ngIf="nameError">Name should be unique</li>
+        <p class="text-center">
+            <button class="btn btn-outline-info" type="submit">Register</button>
+            <button class="btn btn-outline-info" [routerLink]="['/restaurant']">Cancel</button>
+        </p>
+    </form>
+</div>
